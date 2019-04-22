@@ -49,9 +49,6 @@ button {
   display: flex;
   align-items: center;
 }
-#bgcolor {
-  border: 1px solid #000;
-}
 .set-bgcolor ul, 
 .set-width ul, 
 .set-height ul{
