@@ -70,9 +70,18 @@ function events(ele) {
     }
   }
 }
-events(bgcolors)
-events(widths)
-events(heights)
+// 选择背景色
+$("bgcolor").onmouseenter = function(){
+  events(bgcolors)
+}
+// 选择宽度
+$("width").onmouseenter = function(){
+  events(widths)
+}
+// 选择高度
+$("height").onmouseenter = function(){
+  events(heights)
+}
 
 
 // Chrome浏览器支持，英文格式输出rgb格式
