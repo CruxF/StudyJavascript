@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>图片切换</title>
+    <style>
+      div {
+        float: left;
+        margin-right: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="img-switch">
+      <h4>简单的两张图片切换</h4>
+      <img id="img1" src="img/2.jpg" width="200" height="400" />
+    </div>
+    <div class="img-switchs">
+      <h4>复杂的多张图片切换</h4>
+      <img id="img2" src="img/1.jpg" width="200" height="400" />
+    </div>
+    <script>
+      var oImg = document.getElementById("img1");
+      var onOff = true;
+      var oImgs = document.getElementById("img2");
+      var arr = ["img/1.jpg", "img/2.jpg", "img/3.jpg", "img/4.jpg"];
+      var num = 0;
+      // 简单图片切换
+      oImg.onclick = function() {
+        if (onOff) {
+          oImg.src = "img/4.jpg";
+          onOff = false;
+        } else {
+          oImg.src = "img/2.jpg";
+          onOff = true;
+        }
+      };
+      // 复杂图片切换
+      oImgs.onclick = function() {
+        num++;
+        if (num === arr.length) {
+          num = 0;
+        }
+        oImgs.src = arr[num];
+      };
+    </script>
+  </body>
+</html>

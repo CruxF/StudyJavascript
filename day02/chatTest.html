@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .out-box {
+        height: 500px;
+        width: 300px;
+        padding: 50px 20px;
+        box-sizing: border-box;
+        box-shadow: 0 0 10px #333;
+        border-radius: 20px;
+      }
+      .in-box {
+        position: relative;
+        border: 2px solid black;
+        border-radius: 5px;
+        padding-bottom: 50px;
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;       
+      }
+      .content {
+        padding: 10px;
+        box-sizing: border-box;
+        height: 100%;
+        overflow-y: auto;
+      }
+      .send {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 45px;
+        width: 100%;
+        border-top: 1px solid saddlebrown;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 8px;
+        box-sizing: border-box;
+        z-index: 100;
+      }
+      .send input {
+        height: 26px;
+        width: 60%;
+        border-radius: 3px;
+        border: 1px solid #666;
+        padding: 0 6px;
+        box-sizing: border-box;
+        outline: none;
+      }
+      .send span:hover {
+        cursor: pointer;
+      }
+      .cir-footer {
+        height: 30px;
+        width: 30px;
+        border-radius: 50px;
+        margin: 10px auto;
+        box-shadow: 0 0 2px 5px #666;
+      }
+      .right {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content:start;
+        align-items: center;
+      }
+      .right p {
+        background-color: greenyellow;
+        padding: 2px 10px;
+        border-radius: 3px;
+        box-sizing: border-box;
+      }
+      .left {
+        display: flex;
+        flex-direction: reverse;
+        justify-content:start;
+        align-items: center;
+      }
+      .left p{
+        background-color: rgb(13, 116, 81);
+        padding: 2px 10px;
+        border-radius: 3px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="out-box">
+      <div class="in-box">
+        <div class="content" id="content">
+          
+        </div>
+        <div class="send">
+          <span>小明</span>
+          <input type="text" value="">
+          <span>发送</span>
+        </div>
+      </div>
+      <div class="cir-footer"></div>
+    </div>
+
+    <script>
+      let spa = document.getElementsByTagName("span")
+      let inp = document.getElementsByTagName("input")
+      let content = document.getElementById("content")
+      spa[0].onclick = function() {
+        spa[0].innerHTML=="小明"?spa[0].innerHTML="小王":spa[0].innerHTML="小明"
+      }
+      spa[1].onclick = function() {
+        if(inp[0].value==""){
+          alert("请输入内容")
+        } else if(spa[0].innerHTML=="小明"){
+          content.innerHTML += `<div class='right'><h5>${spa[0].innerHTML}</h5><p>${inp[0].value}</p></div>`
+          inp[0].value=""
+          inp[0].focus()
+        } else if(spa[0].innerHTML=="小王"){
+          content.innerHTML += `<div class='left'><h5>${spa[0].innerHTML}</h5><p>${inp[0].value}</p></div>`
+          inp[0].value=""
+          inp[0].focus()
+        }
+      }
+    </script>
+  </body>
+</html>

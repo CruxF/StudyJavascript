@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>图片切换综合案例</title>
+    <style>
+      p {
+        margin: 0;
+      }
+      body {
+        text-align: center;
+      }
+      #box {
+        width: 400px;
+        height: 400px;
+        border: 10px solid #ccc;
+        margin: 50px auto 0;
+        position: relative;
+      }
+      a {
+        width: 40px;
+        height: 40px;
+        background: #fff;
+        opacity: 0.8;
+        position: absolute;
+        top: 160px;
+        font-size: 18px;
+        color: #000;
+        text-align: center;
+        line-height: 40px;
+        text-decoration: none;
+      }
+      a:hover {
+        opacity: 0.3;
+      }
+      #prev {
+        left: 10px;
+      }
+      #next {
+        right: 10px;
+      }
+      #p1 {
+        width: 400px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        background: #000;
+        color: #fff;
+        font-size: 14px;
+        opacity: 0.8;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+      strong {
+        width: 400px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        background: #000;
+        color: #fff;
+        font-size: 14px;
+        opacity: 0.8;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      #img1 {
+        width: 400px;
+        height: 400px;
+      }
+      span {
+        position: absolute;
+        width: 400px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        top: -50px;
+        left: 0;
+        font-family: "微软雅黑";
+      }
+      input {
+        border: 1px solid yellow;
+        outline: none;
+        padding: 5px 8px;
+      }
+    </style>
+    <script>
+      window.onload = function() {
+        // 封装获取id
+        function getDom(id) {
+          return document.getElementById(id);
+        }
+        // 封装获取元素
+        function getTag(ele) {
+          return document.getElementsByTagName(ele);
+        }
+        var oPrev = getDom("prev");
+        var oNext = getDom("next");
+        var oP = getDom("p1");
+        var oStrong = getDom("strong1");
+        var oImg = getDom("img1");
+        var aBtn = getTag("input");
+
+        var imgArr = [
+          {
+            src: "img/1.jpg",
+            name: "第一张图片"
+          },
+          {
+            src: "img/2.jpg",
+            name: "第二张图片"
+          },
+          {
+            src: "img/3.jpg",
+            name: "第三张图片"
+          },
+          {
+            src: "img/4.jpg",
+            name: "第四张图片"
+          }
+        ];
+        var num = 0;
+        var onOff = true;
+        // 图片切换类型选择
+        getTag("input")[0].style.backgroundColor = "#666";
+        aBtn[0].onclick = function() {
+          onOff = true;
+          getTag("span")[0].innerHTML = "图片可从最后一张跳转到第一张循环切换";
+          getTag("input")[0].style.backgroundColor = "#666";
+          getTag("input")[1].style.backgroundColor = "transparent";
+        };
+        aBtn[1].onclick = function() {
+          onOff = false;
+          getTag("span")[0].innerHTML = "图片只能到最后一张或只能到第一张切换";
+          getTag("input")[0].style.backgroundColor = "transparent";
+          getTag("input")[1].style.backgroundColor = "#666";
+        };
+
+        // 初始化
+        function fnTab() {
+          oP.innerHTML = imgArr[num].name;
+          oStrong.innerHTML = num + 1 + " / " + imgArr.length;
+          oImg.src = imgArr[num].src;
+        }
+        fnTab();
+
+        oPrev.onclick = function() {
+          num--;
+          if (num == -1 && onOff) {
+            num = imgArr.length - 1;
+          } else if (num == -1 && !onOff) {
+            alert("这已经是第一张了，不能再往前了~~");
+            num = 0;
+          }
+          fnTab();
+        };
+        oNext.onclick = function() {
+          num++;
+          if (num == imgArr.length && onOff) {
+            num = 0;
+          } else if (num == imgArr.length && !onOff) {
+            alert("已经到最后一张啦~");
+            num = imgArr.length - 1;
+          }
+          fnTab();
+        };
+      };
+    </script>
+  </head>
+
+  <body>
+    <input type="button" value="循环切换" />
+    <input type="button" value="顺序切换" />
+
+    <div id="box">
+      <span>图片可从最后一张跳转到第一张循环切换</span>
+      <a id="prev" href="javascript:void(0);">&lt;</a>
+      <a id="next" href="javascript:void(0);">&gt;</a>
+      <p id="p1">图片文字加载中……</p>
+      <strong id="strong1">图片数量计算中……</strong>
+      <img id="img1" />
+    </div>
+  </body>
+</html>
