@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+
+    <script>
+      window.onload = function() {
+        var oUl = document.getElementById("list");
+        var aUl = oUl.getElementsByTagName("ul");
+        var len = aUl.length;
+        var aLi = [];
+
+        for (var i = 0; i < len; i++) {
+          aLi = aUl[i].getElementsByTagName("li");
+
+          for (var j = 0; j < aLi.length; j++) {
+            aLi[j].style.border = "1px solid red";
+          }
+        }
+      };
+    </script>
+  </head>
+
+  <body>
+    <ul id="list">
+      <li>
+        <h2>我的好友</h2>
+        <ul>
+          <li>莫涛</li>
+          <li>张森</li>
+          <li>杜鹏</li>
+        </ul>
+      </li>
+      <li>
+        <ol>
+          <li>no</li>
+          <li>no</li>
+          <li>no</li>
+        </ol>
+      </li>
+      <li>
+        <h2>我的坏友</h2>
+        <ul>
+          <li>莫小涛</li>
+          <li>张小森</li>
+        </ul>
+      </li>
+      <li>
+        <ol>
+          <li>no</li>
+          <li>no</li>
+          <li>no</li>
+        </ol>
+      </li>
+      <li>
+        <h2>我的黑名单</h2>
+        <ul>
+          <li>莫张</li>
+        </ul>
+      </li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>this基础</title>
+  </head>
+  <body>
+    <button>按钮一</button>
+    <button onclick="fn()">按钮二(this指向window)</button>
+
+    <script>
+      let btn = document.getElementsByTagName("button");
+      btn[0].onclick = function() {
+        fn(); // this指向window
+      };
+      btn[0].onclick = fn; // this指向btn[0]
+
+      function fn() {
+        console.log(this);
+      }
+
+      fn(); // this指向window
+    </script>
+  </body>
+</html>

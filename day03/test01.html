@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <style>
+    ul,
+    li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    ul {
+      width: 70vw;
+      height: auto;
+      margin: 100px auto;
+    }
+    li {
+      position: relative;
+      display: inline-block;
+      width: 12vw;
+      line-height: 100px;
+      margin-bottom: 30px;
+      border: 1px solid #666;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    li:hover {
+      cursor: pointer;
+    }
+    p {
+      position: absolute;
+      left: 0;
+      top: 0;
+      line-height: 60px;
+      width: 12vw;
+      background-color: aquamarine;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <body>
+    <ul>
+      <li>标题一</li>
+      <li>标题二</li>
+      <li>标题三</li>
+      <li>标题四</li>
+      <li>标题五</li>
+      <li>标题六</li>
+      <li>标题七</li>
+      <li>标题八</li>
+      <li>标题九</li>
+      <li>标题十</li>
+    </ul>
+
+    <script>
+      let uls = document.getElementsByTagName("ul")[0];
+      let lis = uls.getElementsByTagName("li");
+      for (let i = 0; i < lis.length; i++) {
+        lis[i].onmouseenter = function(e) {
+          let ev = e || window.event;
+          let target = ev.target || ev.srcElement;
+
+          let pele = document.createElement("p");
+          pele.innerHTML = target.innerHTML;
+          pele.style.left = 0 + "px";
+          pele.style.top = -60 + "px";
+          lis[i].appendChild(pele);
+        };
+        lis[i].onmouseleave = function(e) {
+          let ps = document.getElementsByTagName("p")[0];
+          let parentObj = ps.parentNode;
+          parentObj.removeChild(ps);
+        };
+      }
+    </script>
+  </body>
+</html>

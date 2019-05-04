@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      div {
+        position: absolute;
+        left: 0;
+        height: 0;
+        height: 50px;
+        line-height: 50px;
+        width: 50px;
+        text-align: center;
+        border: 1px solid #666;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="addDiv(10)">自动生成10Li</button>
+
+    <script>
+      function addDiv(num) {
+        for (let i = 0; i < num; i++) {
+          let divEle = document.createElement("div");
+          divEle.innerHTML = i;
+          divEle.style.left = 10 + i * 60 + "px";
+          if (i % 4 == 0) {
+            divEle.style.backgroundColor = "red";
+          } else if (i % 4 == 1) {
+            divEle.style.backgroundColor = "yellow";
+          } else if (i % 4 == 2) {
+            divEle.style.backgroundColor = "blue";
+          } else if (i % 4 == 3) {
+            divEle.style.backgroundColor = "green";
+          }
+          document.body.appendChild(divEle);
+        }
+      }
+    </script>
+  </body>
+</html>
