@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 原始数据类型
+      let num = 33
+      let unde = undefined
+      let nul = null
+      let bo = true
+      let str = 'yy'
+      let sym = Symbol('4jht')
+      console.log(typeof num) //number
+      console.log(typeof unde) //undefined
+      console.log(typeof nul) //object
+      console.log(typeof bo) //boolean
+      console.log(typeof str) //string
+      console.log(typeof sym) //symbol
+      console.log(Object.prototype.toString.apply(num)) //[object Number]
+      console.log(Object.prototype.toString.apply(sym)) //[object Symbl]
+
+      // 引用数据类型
+      function fn(){}
+      let obj = {}
+      let arr = []
+      console.log(typeof fn) //function
+      console.log(typeof obj) //object
+      console.log(typeof arr) //object
+      console.log(fn instanceof Function) //true
+      console.log(fn instanceof Object) //true
+      console.log(obj instanceof Object) //true
+      console.log(arr instanceof Array) //true
+      console.log(arr instanceof Object) //true
+      console.log(Object.prototype.toString.apply(fn)) //[object Function]
+      console.log(Object.prototype.toString.apply(arr)) //[object Array]
+    </script>
+  </body>
+</html>

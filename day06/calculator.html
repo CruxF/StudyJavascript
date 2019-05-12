@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script>
+      window.onload = function() {
+        var oUl = document.getElementById("list");
+        var aLi = oUl.getElementsByTagName("li");
+        var aPt=document.getElementsByTagName("p")[0];
+        var aSpant=aPt.getElementsByTagName("span")[0]; //总价格
+        var aB=aPt.getElementsByTagName("b")[0]; //总数量
+        var aStrong=aPt.getElementsByTagName("strong")[0]; //单价最高
+        for (var i = 0; i < aLi.length; i++) {
+          fn1(aLi[i]);
+        }
+        
+        // 公共计算函数
+        function fn1(oLi) {
+          var aBtn = oLi.getElementsByTagName("input");
+          var oStrong = oLi.getElementsByTagName("strong")[0];
+          var oEm = oLi.getElementsByTagName("em")[0];
+          var oSpan = oLi.getElementsByTagName("span")[0];
+          var n1 = Number(oStrong.innerHTML); //数量
+          var n2 = parseFloat(oEm.innerHTML); //单价
+          
+          // 合计数量与价格,单价最高
+          function fn1(){
+            var temp =0; //合计价格
+            var emMax = 0; //单价最高
+            var totalNum = 0; //合计数量
+            for(var i=0;i<aLi.length;i++){
+              // 物品小记
+              var spans = aLi[i].getElementsByTagName("span")[0];
+              // 物品数量
+              var strongs = aLi[i].getElementsByTagName("strong")[0];
+              // 物品单价
+              var em = aLi[i].getElementsByTagName("em")[0];
+              totalNum = totalNum + parseFloat(strongs.innerHTML)              
+              temp = temp + parseFloat(spans.innerHTML); //合计就是所有小计相加的结果，因为有小数所以要用parseFloat
+              if(parseFloat(em.innerHTML)>emMax){//最大的那个单价值
+                emMax = parseFloat(em.innerHTML);
+              }
+            }
+            aB.innerHTML = totalNum;
+            aSpant.innerHTML = temp;
+            aStrong.innerHTML = emMax;
+          }
+          fn1();
+
+          aBtn[0].onclick = function() {
+            n1--;
+            if (n1 < 0) {
+              n1 = 0;
+            }
+            oStrong.innerHTML = n1;
+            oSpan.innerHTML = n1 * n2 + "元";
+            fn1();
+          };
+          aBtn[1].onclick = function() {
+            n1++;
+            oStrong.innerHTML = n1;
+            oSpan.innerHTML = n1 * n2 + "元";
+            fn1();
+          };                   
+        }
+      };
+    </script>
+  </head>
+
+  <body>
+    <ul id="list">
+      <li>
+        <input type="button" value="-"/>
+        <strong>0</strong>
+        <input type="button" value="+"/>
+        单价：<em>12.5元</em> 小计：<span>0元</span>
+      </li>
+      <li>
+        <input type="button" value="-"/>
+        <strong>0</strong>
+        <input type="button" value="+"/>
+        单价：<em>10.5元</em> 小计：<span>0元</span>
+      </li>
+      <li>
+        <input type="button" value="-"/>
+        <strong>0</strong>
+        <input type="button" value="+"/>
+        单价：<em>8.5元</em> 小计：<span>0元</span>
+      </li>
+      <li>
+        <input type="button" value="-"/>
+        <strong>0</strong>
+        <input type="button" value="+"/>
+        单价：<em>8元</em> 小计：<span>0元</span>
+      </li>
+      <li>
+        <input type="button" value="-"/>
+        <strong>0</strong>
+        <input type="button" value="+"/>
+        单价：<em>14.5元</em> 小计：<span>0元</span>
+      </li>
+    </ul>
+    <p>
+      商品合计共：<b></b>件，共花费了：<span></span>元<br />
+      其中最贵的商品单价是：<strong></strong>元
+    </p>
+  </body>
+</html>

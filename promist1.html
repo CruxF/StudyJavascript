@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // promise的基本用法
+      function sleep1(duration) {
+        return new Promise(function(resolve, reject) {
+          setTimeout(resolve, duration);
+        });
+      }
+      sleep1(5000).then(() => {
+        console.log("5s后被触发");
+      });
+
+      // 宏任务与微任务
+      let sleep2 = new Promise(function(resolve, reject) {
+        console.log("b1");
+      });
+      sleep2.then(() => console.log("c1"));
+      console.log("a1");
+
+      // 宏任务与微任务
+      function sleep3(duration) {
+        return new Promise(function(resolve, reject) {
+          console.log("b2");
+          setTimeout(resolve, duration);
+        });
+      }
+      console.log("a2");
+      sleep3(3000).then(() => {
+        console.log("c2");
+      });
+
+      // async和await
+      function sleep4(duration) {
+        return new Promise((resolve, reject) => {
+          setTimeout(resolve, duration);
+        });
+      }
+      async function foo() {
+        console.log("a3");
+        await sleep4(4000);
+        console.log("b3");
+      }
+      foo();
+
+      // async和await
+      function sleep5(duration) {
+        return new Promise(function(resolve, reject) {
+          setTimeout(resolve, duration);
+        });
+      }
+      async function foo1(name) {
+        await sleep5(2000);
+        console.log(name);
+      }
+      async function foo2() {
+        await foo1("a4");
+        await foo1("b4");
+      }
+      foo2();
+    </script>
+  </body>
+</html>

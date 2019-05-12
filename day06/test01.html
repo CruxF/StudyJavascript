@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      ul,
+      li {
+        list-style: none;
+      }
+      li {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        background-color: aquamarine;
+        color: black;
+        padding: 0 10px;
+        border-bottom: 1px solid brown;
+        z-index: 1000;
+        padding: 10px;
+      }
+      li:hover {
+        cursor: pointer;
+      }
+      li > span {
+        display: inline-block;
+        background-color: blueviolet;
+        color: #fff;
+        padding: 4px 8px;
+        margin-right: 10px;
+      }
+      li > p {
+        margin: 0;
+        padding: 0;
+      }
+      li .play {
+        margin-left: 50px;
+        display: inline-block;
+        padding: 4px 8px;
+        color: #fff;
+        background-color: black;
+        border-radius: 4px;
+        vertical-align: middle;
+      }
+      li img {
+        display: inline-block;
+        height: 100px;
+        width: 150px;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <span>1</span>
+        <p>新闻一</p>
+      </li>
+      <li>
+        <span>2</span>
+        <p>新闻二</p>
+      </li>
+      <li>
+        <span>3</span>
+        <p>新闻三</p>
+      </li>
+      <li>
+        <span>4</span>
+        <p>新闻四</p>
+      </li>
+      <li>
+        <span>5</span>
+        <p>新闻五</p>
+      </li>
+      <li>
+        <span>6</span>
+        <p>新闻六</p>
+      </li>
+    </ul>
+
+    <script>
+      let uls = document.getElementsByTagName("ul")[0];
+      let lis = uls.getElementsByTagName("li");
+      let conStr = ["新闻一", "新闻二", "新闻三", "新闻四", "新闻五", "新闻六"];
+      let imgs = [
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557656234174&di=30c2993abdce2e2aa8df3c7117b769cd&imgtype=0&src=http%3A%2F%2Fimg.18183.com%2Fuploads%2Fallimg%2F171127%2F193-1G12G41254.jpg",
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557656234171&di=e5370886cccd417edbf762bc28625f59&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F77bd630e1fee8a55f065e4d062eb37f3d5104d66.jpg",
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557656273058&di=a533e272df166cf2003152631037f5fe&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D3414350434%2C1494244684%26fm%3D214%26gp%3D0.jpg",
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557656234169&di=dd08979133e763c864f2be0768095e3a&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201710%2F08%2F20171008153238_rBxXS.thumb.700_0.jpeg",
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557656234165&di=33c08fc2533d3cc0bfc100bb0c2978f7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201711%2F28%2F20171128220413_VGH4x.png",
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557656287007&di=ba2efb22a612d888ebde04b08a59044d&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201704%2F02%2F20170402175655_Yt5Px.jpeg"
+      ];
+      for (let i = 0; i < lis.length; i++) {
+        let imgStr = `<img alt='图片${i}' src='${imgs[i]}'><span class='play' id='play'>播放</span>`;
+        lis[i].onmouseenter = function(ev) {
+          let oEvent = ev || window.event;
+          if (toAffect(lis[i], oEvent, "mouseenter")) {
+            lis[i].getElementsByTagName("p")[0].innerHTML = imgStr;
+            document.getElementById("play").onclick = function(){
+              alert(i)
+            }
+          }
+        };
+        lis[i].onmouseout = function(ev) {
+          let oEvent = ev || window.event;
+          if (toAffect(lis[i], oEvent, "mouseout")) {
+            lis[i].getElementsByTagName("p")[0].innerHTML = conStr[i];
+          }
+        };
+      }
+      // 解决子元素对父元素鼠标事件的影响
+      function toAffect(obj1, ev, event) {
+        var obj2 = null;
+        // 判断鼠标从哪个元素中移入移出
+        if (ev.relatedTarget) {
+          obj2 = ev.relatedTarget;
+        } else {
+          if (event == "mouseover") {
+            obj2 = ev.fromElement;
+          } else if (event == "mouseout") {
+            obj2 = ev.toElement;
+          }
+        }
+        if (obj1.contains) {
+          return !obj1.contains(obj2);
+        } else {
+          return !!(obj1.compareDocumentPosition(obj2) - 20) && obj1 != obj2;
+        }
+      }
+    </script>
+  </body>
+</html>
