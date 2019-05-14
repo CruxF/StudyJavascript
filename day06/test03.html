@@ -130,12 +130,24 @@
       ];
       for (let i = 0; i < lif.length; i++) {
         lif[i].onclick = function() {
+          styleChange(i)
+          uls[1].innerHTML = ''
           imgTab(i,cnum,imgObj[i])
         };
       }
+      // 样式改变
+      function styleChange(i){
+        for(let j=0;j<lif.length;j++){
+          if(i==j){
+            lif[j].style.color = 'red'
+          } else {
+            lif[j].style.color = '#000'
+          }
+        }
+      }
+      styleChange(0)
       // 图片切换
       function imgTab(num,cnum,img) {
-        console.log(img)
         for(let j=0;j<img.length;j++){
           uls[1].innerHTML += `<li>元素${j}</li>`
         }
