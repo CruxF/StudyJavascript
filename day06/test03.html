@@ -19,15 +19,17 @@
       .head-ul li {
         width: 100;
         text-align: center;
-        line-height: 50px;
+        line-height: 49px;
         border-bottom: 1px solid #666;
+        box-sizing: border-box;
+        background-color: #ccc;
+        color: #fff;
       }
       div {
         float: left;
         height: 200px;
         width: 700px;
         position: relative;
-        border: 1px solid red;
       }
       div ul {
         position: absolute;
@@ -45,6 +47,9 @@
         border-left: 2px solid #fff;
         box-sizing: border-box;
         color: #fff;
+      }
+      div ul li:first-child {
+        border-left: 0px solid transparent;
       }
       div img {
         height: 200px;
@@ -130,30 +135,39 @@
       ];
       for (let i = 0; i < lif.length; i++) {
         lif[i].onclick = function() {
-          styleChange(i)
+          styleChange(i,lif)
           uls[1].innerHTML = ''
           imgTab(i,cnum,imgObj[i])
         };
       }
       // 样式改变
-      function styleChange(i){
-        for(let j=0;j<lif.length;j++){
+      function styleChange(i,liArr){
+        for(let j=0;j<liArr.length;j++){
           if(i==j){
-            lif[j].style.color = 'red'
+            liArr[j].style.color = 'green'
           } else {
-            lif[j].style.color = '#000'
+            liArr[j].style.color = '#fff'
           }
         }
       }
-      styleChange(0)
+      styleChange(0,lif)     
       // 图片切换
       function imgTab(num,cnum,img) {
         for(let j=0;j<img.length;j++){
           uls[1].innerHTML += `<li>元素${j}</li>`
         }
         imgs.src = imgObj[num][cnum].url;        
+        styleChange(0,lis)
+        // 鼠标滑动
+        for(let i=0;i<lis.length;i++){
+          lis[i].onmouseenter = function(){
+            imgs.src = imgObj[num][i].url;
+            styleChange(i,lis)
+          }
+        }
       }
       imgTab(num,cnum,imgObj[0])
+      styleChange(0,lis)
     </script>
   </body>
 </html>
